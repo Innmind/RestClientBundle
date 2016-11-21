@@ -16,7 +16,10 @@
     },
     "require": {
         "php": "~7.0",
-        "innmind/rest-client": "dev-develop"
+        "innmind/rest-client": "dev-develop",
+        "symfony/http-kernel": "~3.0",
+        "symfony/dependency-injection": "~3.0",
+        "symfony/config": "~3.0"
     },
     "autoload": {
         "psr-4": {

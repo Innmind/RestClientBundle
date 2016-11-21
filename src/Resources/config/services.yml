@@ -1,0 +1,13 @@
+imports:
+    - { resource: 'formats.yml' }
+
+services:
+    innmind_rest_client.definition.types:
+        class: Innmind\Rest\Client\Definition\Types
+        configurator:
+            - '@innmind_rest_client.types_configurator'
+            - configure
+
+    innmind_rest_client.types_configurator:
+        class: Innmind\Rest\ClientBundle\TypesConfigurator
+        public: false
