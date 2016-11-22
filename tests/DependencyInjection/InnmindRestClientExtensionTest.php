@@ -7,8 +7,11 @@ use Innmind\Rest\ClientBundle\DependencyInjection\InnmindRestClientExtension;
 use Innmind\Rest\Client\Definition\TypeInterface;
 use Symfony\Component\{
     HttpKernel\DependencyInjection\Extension,
-    DependencyInjection\ContainerBuilder
+    DependencyInjection\ContainerBuilder,
+    DependencyInjection\Definition,
+    Serializer\Serializer
 };
+use Psr\Log\NullLogger;
 
 class InnmindRestClientExtensionTest extends \PHPUnit_Framework_TestCase
 {
@@ -126,5 +129,19 @@ class InnmindRestClientExtensionTest extends \PHPUnit_Framework_TestCase
                 ->getDefinition('innmind_rest_client.filesystem')
                 ->getArgument(0)
         );
+    }
+
+    public function testCompile()
+    {
+        $container = new ContainerBuilder;
+        $container->setDefinition('logger', new Definition(NullLogger::class));
+        $container->setDefinition('serializer', new Definition(Serializer::class));
+        (new InnmindRestClientExtension)->load(
+            [],
+            $container
+        );
+
+        $container->compile();
+        $this->assertTrue(true);
     }
 }
