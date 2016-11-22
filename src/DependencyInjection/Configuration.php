@@ -41,6 +41,7 @@ final class Configuration implements ConfigurationInterface
                         ->thenInvalid('Invalid log level (check Psr\Log\LogLevel)')
                     ->end()
                 ->end()
+                ->scalarNode('cache_directory')->end()
                 ->arrayNode('content_type')
                     ->info('The list of formats you accept in the "Content-Type" response header')
                     ->useAttributeAsKey('name')

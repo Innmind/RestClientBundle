@@ -29,6 +29,7 @@ final class InnmindRestClientExtension extends Extension
 
         $this
             ->configureLogLevel($config, $container)
+            ->configureCacheDirectory($config, $container)
             ->registerTypes($config['types'], $container)
             ->registerContentTypeFormats($config['content_type'], $container);
     }
@@ -41,6 +42,19 @@ final class InnmindRestClientExtension extends Extension
             $container
                 ->getDefinition('innmind_rest_client.transport.logger')
                 ->replaceArgument(2, $config['log_level']);
+        }
+
+        return $this;
+    }
+
+    private function configureCacheDirectory(
+        array $config,
+        ContainerBuilder $container
+    ): self {
+        if (isset($config['cache_directory'])) {
+            $container
+                ->getDefinition('innmind_rest_client.filesystem')
+                ->replaceArgument(0, $config['cache_directory']);
         }
 
         return $this;

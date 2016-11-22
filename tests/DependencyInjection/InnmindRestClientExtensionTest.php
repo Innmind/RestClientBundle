@@ -101,4 +101,30 @@ class InnmindRestClientExtensionTest extends \PHPUnit_Framework_TestCase
             $container
         );
     }
+
+    public function testOverwriteCacheDirectory()
+    {
+        $container = new ContainerBuilder;
+        (new InnmindRestClientExtension)->load(
+            [[
+                'cache_directory' => '/somewhere',
+                'content_type' => [
+                    'json' => [
+                        'priority' => 42,
+                        'media_types' => [
+                            'application/json' => 0,
+                        ],
+                    ],
+                ],
+            ]],
+            $container
+        );
+
+        $this->assertSame(
+            '/somewhere',
+            $container
+                ->getDefinition('innmind_rest_client.filesystem')
+                ->getArgument(0)
+        );
+    }
 }
