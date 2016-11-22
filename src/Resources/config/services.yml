@@ -1,6 +1,7 @@
 imports:
     - { resource: 'formats.yml' }
     - { resource: 'transport.yml' }
+    - { resource: 'serializer.yml' }
 
 services:
     innmind_rest_client.definition.types:
@@ -11,4 +12,8 @@ services:
 
     innmind_rest_client.types_configurator:
         class: Innmind\Rest\ClientBundle\TypesConfigurator
+        public: false
+
+    innmind_rest_client.url_resolver:
+        class: Innmind\UrlResolver\UrlResolver
         public: false
