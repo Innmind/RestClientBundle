@@ -52,4 +52,53 @@ class InnmindRestClientExtensionTest extends \PHPUnit_Framework_TestCase
                 ->getArgument(0)
         );
     }
+
+    public function testOverwriteLogLevel()
+    {
+        $container = new ContainerBuilder;
+        (new InnmindRestClientExtension)->load(
+            [[
+                'log_level' => 'emergency',
+                'content_type' => [
+                    'json' => [
+                        'priority' => 42,
+                        'media_types' => [
+                            'application/json' => 0,
+                        ],
+                    ],
+                ],
+            ]],
+            $container
+        );
+
+        $this->assertSame(
+            'emergency',
+            $container
+                ->getDefinition('innmind_rest_client.transport.logger')
+                ->getArgument(2)
+        );
+    }
+
+    /**
+     * @expectedException Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+     * @expectedExceptionMessage Invalid configuration for path "innmind_rest_client.log_level": Invalid log level (check Psr\Log\LogLevel)
+     */
+    public function testThrowWhenInvalidLogLevel()
+    {
+        $container = new ContainerBuilder;
+        (new InnmindRestClientExtension)->load(
+            [[
+                'log_level' => 'whatever',
+                'content_type' => [
+                    'json' => [
+                        'priority' => 42,
+                        'media_types' => [
+                            'application/json' => 0,
+                        ],
+                    ],
+                ],
+            ]],
+            $container
+        );
+    }
 }

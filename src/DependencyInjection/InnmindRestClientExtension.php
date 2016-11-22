@@ -28,8 +28,22 @@ final class InnmindRestClientExtension extends Extension
         );
 
         $this
+            ->configureLogLevel($config, $container)
             ->registerTypes($config['types'], $container)
             ->registerContentTypeFormats($config['content_type'], $container);
+    }
+
+    private function configureLogLevel(
+        array $config,
+        ContainerBuilder $container
+    ): self {
+        if (isset($config['log_level'])) {
+            $container
+                ->getDefinition('innmind_rest_client.transport.logger')
+                ->replaceArgument(2, $config['log_level']);
+        }
+
+        return $this;
     }
 
     private function registerTypes(array $types, ContainerBuilder $container): self

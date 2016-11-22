@@ -7,6 +7,7 @@ use Symfony\Component\Config\Definition\{
     Builder\TreeBuilder,
     ConfigurationInterface
 };
+use Psr\Log\LogLevel;
 
 final class Configuration implements ConfigurationInterface
 {
@@ -23,6 +24,22 @@ final class Configuration implements ConfigurationInterface
                 ->arrayNode('types')
                     ->defaultValue([])
                     ->prototype('scalar')->end()
+                ->end()
+                ->scalarNode('log_level')
+                    ->info('Log level to be used to log all request sent')
+                    ->validate()
+                    ->ifNotInArray([
+                        LogLevel::EMERGENCY,
+                        LogLevel::ALERT,
+                        LogLevel::CRITICAL,
+                        LogLevel::ERROR,
+                        LogLevel::WARNING,
+                        LogLevel::NOTICE,
+                        LogLevel::INFO,
+                        LogLevel::DEBUG,
+                    ])
+                        ->thenInvalid('Invalid log level (check Psr\Log\LogLevel)')
+                    ->end()
                 ->end()
                 ->arrayNode('content_type')
                     ->info('The list of formats you accept in the "Content-Type" response header')
