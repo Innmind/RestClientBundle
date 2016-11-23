@@ -1,0 +1,37 @@
+services:
+    innmind_rest_client.serializer.normalizer.definition:
+        class: Innmind\Rest\Client\Serializer\Normalizer\DefinitionNormalizer
+        arguments:
+            - '@innmind_rest_client.definition.types'
+        tags:
+            - { name: serializer.normalizer }
+
+    innmind_rest_client.serializer.normalizer.identities:
+        class: Innmind\Rest\Client\Serializer\Normalizer\IdentitiesNormalizer
+        arguments:
+            - '@innmind_rest_client.identity_resolver'
+        tags:
+            - { name: serializer.normalizer }
+
+    innmind_rest_client.serializer.normalizer.identity:
+        class: Innmind\Rest\Client\Serializer\Normalizer\IdentityNormalizer
+        arguments:
+            - '@innmind_rest_client.identity_resolver'
+        tags:
+            - { name: serializer.normalizer }
+
+    innmind_rest_client.serializer.normalizer.capabilities_names:
+        class: Innmind\Rest\Client\Serializer\Normalizer\CapabilitiesNamesNormalizer
+        tags:
+            - { name: serializer.normalizer }
+
+    innmind_rest_client.serializer.normalizer.resource:
+        class: Innmind\Rest\Client\Serializer\Normalizer\ResourceNormalizer
+        tags:
+            - { name: serializer.normalizer }
+
+    innmind_rest_client.identity_resolver:
+        class: Innmind\Rest\Client\Visitor\ResolveIdentity
+        public: false
+        arguments:
+            - '@innmind_rest_client.url_resolver'

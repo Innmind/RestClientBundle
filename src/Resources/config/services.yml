@@ -1,0 +1,46 @@
+imports:
+    - { resource: 'formats.yml' }
+    - { resource: 'transport.yml' }
+    - { resource: 'serializer.yml' }
+
+services:
+    innmind_rest_client:
+        class: Innmind\Rest\Client\Client
+        arguments:
+            - '@innmind_rest_client.transport'
+            - '@innmind_rest_client.url_resolver'
+            - '@serializer'
+            - '@innmind_rest_client.specification_translator'
+            - '@innmind_rest_client.definition_factory'
+            - '@innmind_rest_client.filesystem'
+            - '@innmind_rest_client.formats.content_type'
+
+    innmind_rest_client.definition.types:
+        class: Innmind\Rest\Client\Definition\Types
+        configurator:
+            - '@innmind_rest_client.types_configurator'
+            - configure
+
+    innmind_rest_client.types_configurator:
+        class: Innmind\Rest\ClientBundle\TypesConfigurator
+        public: false
+
+    innmind_rest_client.url_resolver:
+        class: Innmind\UrlResolver\UrlResolver
+        public: false
+
+    innmind_rest_client.specification_translator:
+        class: Innmind\Rest\Client\Translator\SpecificationTranslator
+        public: false
+
+    innmind_rest_client.definition_factory:
+        class: Innmind\Rest\Client\Server\DefinitionFactory
+        public: false
+        arguments:
+            - '@innmind_rest_client.serializer.normalizer.definition'
+
+    innmind_rest_client.filesystem:
+        class: Innmind\Filesystem\Adapter\FilesystemAdapter
+        public: false
+        arguments:
+            - '/tmp'

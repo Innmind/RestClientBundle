@@ -1,0 +1,34 @@
+{
+    "name": "innmind/rest-client-bundle",
+    "type": "library",
+    "description": "Library to consume REST APIs",
+    "keywords": ["rest", "api", "client"],
+    "homepage": "http://github.com/Innmind/RestClientBundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Baptiste Langlade",
+            "email": "langlade.baptiste@gmail.com"
+        }
+    ],
+    "support": {
+        "issues": "http://github.com/Innmind/RestClientBundle/issues"
+    },
+    "require": {
+        "php": "~7.0",
+        "innmind/rest-client": "~3.0",
+        "symfony/http-kernel": "~3.0",
+        "symfony/dependency-injection": "~3.0",
+        "symfony/config": "~3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Innmind\\Rest\\ClientBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\Innmind\\Rest\\ClientBundle\\": "tests/"
+        }
+    }
+}
