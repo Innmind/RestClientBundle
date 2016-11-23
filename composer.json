@@ -16,7 +16,7 @@
     },
     "require": {
         "php": "~7.0",
-        "innmind/rest-client": "dev-develop",
+        "innmind/rest-client": "~3.0",
         "symfony/http-kernel": "~3.0",
         "symfony/dependency-injection": "~3.0",
         "symfony/config": "~3.0"
