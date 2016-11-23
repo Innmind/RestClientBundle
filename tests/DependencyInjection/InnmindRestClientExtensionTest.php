@@ -4,7 +4,10 @@ declare(strict_types = 1);
 namespace Tests\Innmind\Rest\ClientBundle\DependencyInjection;
 
 use Innmind\Rest\ClientBundle\DependencyInjection\InnmindRestClientExtension;
-use Innmind\Rest\Client\Definition\TypeInterface;
+use Innmind\Rest\Client\{
+    Definition\TypeInterface,
+    ClientInterface
+};
 use Symfony\Component\{
     HttpKernel\DependencyInjection\Extension,
     DependencyInjection\ContainerBuilder,
@@ -137,11 +140,24 @@ class InnmindRestClientExtensionTest extends \PHPUnit_Framework_TestCase
         $container->setDefinition('logger', new Definition(NullLogger::class));
         $container->setDefinition('serializer', new Definition(Serializer::class));
         (new InnmindRestClientExtension)->load(
-            [],
+            [[
+                'content_type' => [
+                    'json' => [
+                        'priority' => 42,
+                        'media_types' => [
+                            'application/json' => 0,
+                        ],
+                    ],
+                ],
+            ]],
             $container
         );
 
         $container->compile();
-        $this->assertTrue(true);
+
+        $this->assertInstanceOf(
+            ClientInterface::class,
+            $container->get('innmind_rest_client')
+        );
     }
 }
