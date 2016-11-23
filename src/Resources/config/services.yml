@@ -34,7 +34,7 @@ services:
         public: false
 
     innmind_rest_client.definition_factory:
-        class: Innmind\Rest\Client\DefinitionFactory
+        class: Innmind\Rest\Client\Server\DefinitionFactory
         public: false
         arguments:
             - '@innmind_rest_client.serializer.normalizer.definition'
