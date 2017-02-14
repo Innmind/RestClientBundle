@@ -15,8 +15,9 @@ use Symfony\Component\{
     Serializer\Serializer
 };
 use Psr\Log\NullLogger;
+use PHPUnit\Framework\TestCase;
 
-class InnmindRestClientExtensionTest extends \PHPUnit_Framework_TestCase
+class InnmindRestClientExtensionTest extends TestCase
 {
     public function testInterface()
     {
