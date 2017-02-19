@@ -8,8 +8,9 @@ use Innmind\Rest\Client\Definition\{
     Types,
     TypeInterface
 };
+use PHPUnit\Framework\TestCase;
 
-class TypesConfiguratorTest extends \PHPUnit_Framework_TestCase
+class TypesConfiguratorTest extends TestCase
 {
     public function testConfigure()
     {

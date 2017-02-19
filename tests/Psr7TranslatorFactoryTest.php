@@ -12,8 +12,9 @@ use Innmind\Http\{
 };
 use Innmind\Immutable\StringPrimitive as Str;
 use Psr\Http\Message\ResponseInterface;
+use PHPUnit\Framework\TestCase;
 
-class Psr7TranslatorFactoryTest extends \PHPUnit_Framework_TestCase
+class Psr7TranslatorFactoryTest extends TestCase
 {
     public function testMake()
     {

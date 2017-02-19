@@ -6,7 +6,9 @@ namespace Innmind\Rest\ClientBundle;
 use Innmind\Http\{
     Translator\Response\Psr7Translator,
     Factory\HeaderFactoryInterface,
-    Factory\Header\DefaultFactory
+    Factory\Header\TryFactory,
+    Factory\Header\DelegationFactory,
+    Factory\Header\HeaderFactory
 };
 use Innmind\Immutable\Map;
 
@@ -24,7 +26,10 @@ final class Psr7TranslatorFactory
         }
 
         return new Psr7Translator(
-            new DefaultFactory($factories)
+            new TryFactory(
+                new DelegationFactory($factories),
+                new HeaderFactory
+            )
         );
     }
 }
