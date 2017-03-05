@@ -43,36 +43,11 @@ services:
         class: Innmind\Http\Translator\Response\Psr7Translator
         public: false
         arguments:
-            -
-                'Innmind\Http\Factory\Header\AcceptCharsetFactory' : 'accept-charset'
-                'Innmind\Http\Factory\Header\AcceptEncodingFactory' : 'accept-encoding'
-                'Innmind\Http\Factory\Header\AcceptFactory' : 'accept'
-                'Innmind\Http\Factory\Header\AcceptLanguageFactory' : 'accept-language'
-                'Innmind\Http\Factory\Header\AcceptRangesFactory' : 'accept-ranges'
-                'Innmind\Http\Factory\Header\AcceptFactory' : 'accept'
-                'Innmind\Http\Factory\Header\AgeFactory' : 'age'
-                'Innmind\Http\Factory\Header\AllowFactory' : 'allow'
-                'Innmind\Http\Factory\Header\AuthorizationFactory' : 'authorization'
-                'Innmind\Http\Factory\Header\CacheControlFactory' : 'cache-control'
-                'Innmind\Http\Factory\Header\ContentEncodingFactory' : 'content-encoding'
-                'Innmind\Http\Factory\Header\ContentLanguageFactory' : 'content-language'
-                'Innmind\Http\Factory\Header\ContentLengthFactory' : 'content-length'
-                'Innmind\Http\Factory\Header\ContentLocationFactory' : 'content-location'
-                'Innmind\Http\Factory\Header\ContentRangeFactory' : 'content-range'
-                'Innmind\Http\Factory\Header\ContentTypeFactory' : 'content-type'
-                'Innmind\Http\Factory\Header\DateFactory' : 'date'
-                'Innmind\Http\Factory\Header\ExpiresFactory' : 'expires'
-                'Innmind\Http\Factory\Header\HostFactory' : 'host'
-                'Innmind\Http\Factory\Header\IfModifiedSinceFactory' : 'if-modified-since'
-                'Innmind\Http\Factory\Header\IfUnmodifiedSinceFactory' : 'if-unmodified-since'
-                'Innmind\Http\Factory\Header\LastModifiedFactory' : 'last-modified'
-                'Innmind\Http\Factory\Header\LinkFactory' : 'link'
-                'Innmind\Http\Factory\Header\LocationFactory' : 'location'
-                'Innmind\Http\Factory\Header\RangeFactory' : 'range'
-                'Innmind\Http\Factory\Header\ReferrerFactory' : 'referer'
-        factory:
             - '@innmind_rest_client.psr7_translator.factory'
-            - make
 
     innmind_rest_client.psr7_translator.factory:
-        class: Innmind\Rest\ClientBundle\Psr7TranslatorFactory
+        class: Innmind\Http\Factory\Header\TryFactory
+        public: false
+        factory:
+            - Innmind\Http\Factory\Header\Factories
+            - default
