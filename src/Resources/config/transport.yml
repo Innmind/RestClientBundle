@@ -3,18 +3,21 @@ services:
 
     innmind_rest_client.transport.guzzle:
         class: Innmind\HttpTransport\GuzzleTransport
+        public: false
         arguments:
             - '@innmind_rest_client.guzzle'
             - '@innmind_rest_client.psr7_translator'
 
     innmind_rest_client.transport.catch_guzzle_bad_response_exception:
         class: Innmind\HttpTransport\CatchGuzzleBadResponseExceptionTransport
+        public: false
         arguments:
             - '@innmind_rest_client.transport.guzzle'
             - '@innmind_rest_client.psr7_translator'
 
     innmind_rest_client.transport.logger:
         class: Innmind\HttpTransport\LoggerTransport
+        public: false
         arguments:
             - '@innmind_rest_client.transport.catch_guzzle_bad_response_exception'
             - '@logger'
@@ -26,6 +29,7 @@ services:
 
     innmind_rest_client.psr7_translator:
         class: Innmind\Http\Translator\Response\Psr7Translator
+        public: false
         arguments:
             -
                 'Innmind\Http\Factory\Header\AcceptCharsetFactory' : 'accept-charset'
