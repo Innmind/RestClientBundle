@@ -15,11 +15,23 @@ services:
             - '@innmind_rest_client.transport.guzzle'
             - '@innmind_rest_client.psr7_translator'
 
+    innmind_rest_client.transport.throw_on_client_error:
+        class: Innmind\HttpTransport\ThrowOnClientErrorTransport
+        public: false
+        arguments:
+            - '@innmind_rest_client.transport.catch_guzzle_bad_response_exception'
+
+    innmind_rest_client.transport.throw_on_server_error:
+        class: Innmind\HttpTransport\ThrowOnServerErrorTransport
+        public: false
+        arguments:
+            - '@innmind_rest_client.transport.throw_on_client_error'
+
     innmind_rest_client.transport.logger:
         class: Innmind\HttpTransport\LoggerTransport
         public: false
         arguments:
-            - '@innmind_rest_client.transport.catch_guzzle_bad_response_exception'
+            - '@innmind_rest_client.transport.throw_on_server_error'
             - '@logger'
             - 'debug'
 
