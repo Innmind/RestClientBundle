@@ -130,7 +130,7 @@ class InnmindRestClientExtensionTest extends TestCase
         $this->assertSame(
             '/somewhere',
             $container
-                ->getDefinition('innmind_rest_client.filesystem')
+                ->getDefinition('innmind_rest_client.filesystem.default')
                 ->getArgument(0)
         );
     }
