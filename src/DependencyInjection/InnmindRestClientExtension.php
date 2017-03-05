@@ -53,7 +53,7 @@ final class InnmindRestClientExtension extends Extension
     ): self {
         if (isset($config['cache_directory'])) {
             $container
-                ->getDefinition('innmind_rest_client.filesystem')
+                ->getDefinition('innmind_rest_client.filesystem.default')
                 ->replaceArgument(0, $config['cache_directory']);
         }
 

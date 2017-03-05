@@ -39,8 +39,16 @@ services:
         arguments:
             - '@innmind_rest_client.serializer.normalizer.definition'
 
-    innmind_rest_client.filesystem:
+    innmind_rest_client.filesystem: '@innmind_rest_client.filesystem.cache'
+
+    innmind_rest_client.filesystem.default:
         class: Innmind\Filesystem\Adapter\FilesystemAdapter
         public: false
         arguments:
             - '/tmp'
+
+    innmind_rest_client.filesystem.cache:
+        class: Innmind\Filesystem\Adapter\CacheOpenedFilesAdapter
+        public: false
+        arguments:
+            - '@innmind_rest_client.filesystem.default'
