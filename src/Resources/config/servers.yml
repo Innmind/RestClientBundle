@@ -1,0 +1,19 @@
+services:
+    innmind_rest_client.server: '@innmind_rest_client.server.retry'
+
+    innmind_rest_client.server.default:
+        class: Innmind\Rest\Client\Server\ServerFactory
+        public: false
+        arguments:
+            - '@innmind_rest_client.transport'
+            - '@innmind_rest_client.url_resolver'
+            - '@serializer'
+            - '@innmind_rest_client.specification_translator'
+            - '@innmind_rest_client.formats.content_type'
+            - '@innmind_rest_client.capability'
+
+    innmind_rest_client.server.retry:
+        class: Innmind\Rest\Client\Server\RetryServerFactory
+        public: false
+        arguments:
+            - '@innmind_rest_client.server.default'

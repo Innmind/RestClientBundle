@@ -1,0 +1,25 @@
+services:
+    innmind_rest_client.capability: '@innmind_rest_client.capability.refresh_limited'
+
+    innmind_rest_client.capability.default:
+        class: Innmind\Rest\Client\Server\Capabilities\Factory
+        public: false
+        arguments:
+            - '@innmind_rest_client.transport'
+            - '@innmind_rest_client.url_resolver'
+            - '@innmind_rest_client.definition_factory'
+            - '@innmind_rest_client.formats.content_type'
+
+    innmind_rest_client.capability.cache:
+        class: Innmind\Rest\Client\Server\Capabilities\CacheFactory
+        public: false
+        arguments:
+            - '@innmind_rest_client.filesystem'
+            - '@serializer'
+            - '@innmind_rest_client.capability.default'
+
+    innmind_rest_client.capability.refresh_limited:
+        class: Innmind\Rest\Client\Server\Capabilities\RefreshLimitedFactory
+        public: false
+        arguments:
+            - '@innmind_rest_client.capability.cache'
