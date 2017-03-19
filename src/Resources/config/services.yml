@@ -2,18 +2,14 @@ imports:
     - { resource: 'formats.yml' }
     - { resource: 'transport.yml' }
     - { resource: 'serializer.yml' }
+    - { resource: 'capabilities.yml' }
+    - { resource: 'servers.yml' }
 
 services:
     innmind_rest_client:
         class: Innmind\Rest\Client\Client
         arguments:
-            - '@innmind_rest_client.transport'
-            - '@innmind_rest_client.url_resolver'
-            - '@serializer'
-            - '@innmind_rest_client.specification_translator'
-            - '@innmind_rest_client.definition_factory'
-            - '@innmind_rest_client.filesystem'
-            - '@innmind_rest_client.formats.content_type'
+            - '@innmind_rest_client.server'
 
     innmind_rest_client.definition.types:
         class: Innmind\Rest\Client\Definition\Types
