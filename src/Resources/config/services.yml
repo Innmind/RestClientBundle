@@ -7,7 +7,7 @@ imports:
 
 services:
     innmind_rest_client:
-        class: Innmind\Rest\Client\Client
+        class: Innmind\Rest\Client\Client\Client
         arguments:
             - '@innmind_rest_client.server'
 
@@ -26,7 +26,7 @@ services:
         public: false
 
     innmind_rest_client.specification_translator:
-        class: Innmind\Rest\Client\Translator\SpecificationTranslator
+        class: Innmind\Rest\Client\Translator\Specification\SpecificationTranslator
         public: false
 
     innmind_rest_client.definition_factory:

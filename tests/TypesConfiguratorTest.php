@@ -6,7 +6,7 @@ namespace Tests\Innmind\Rest\ClientBundle;
 use Innmind\Rest\ClientBundle\TypesConfigurator;
 use Innmind\Rest\Client\Definition\{
     Types,
-    TypeInterface
+    Type
 };
 use PHPUnit\Framework\TestCase;
 
@@ -19,31 +19,31 @@ class TypesConfiguratorTest extends TestCase
             (new TypesConfigurator)->configure($types)
         );
         $this->assertInstanceOf(
-            TypeInterface::class,
+            Type::class,
             $types->build('string')
         );
         $this->assertInstanceOf(
-            TypeInterface::class,
+            Type::class,
             $types->build('float')
         );
         $this->assertInstanceOf(
-            TypeInterface::class,
+            Type::class,
             $types->build('int')
         );
         $this->assertInstanceOf(
-            TypeInterface::class,
+            Type::class,
             $types->build('bool')
         );
         $this->assertInstanceOf(
-            TypeInterface::class,
+            Type::class,
             $types->build('date<c>')
         );
         $this->assertInstanceOf(
-            TypeInterface::class,
+            Type::class,
             $types->build('set<string>')
         );
         $this->assertInstanceOf(
-            TypeInterface::class,
+            Type::class,
             $types->build('map<int, int>')
         );
     }
