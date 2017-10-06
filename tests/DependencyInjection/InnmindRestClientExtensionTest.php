@@ -5,8 +5,8 @@ namespace Tests\Innmind\Rest\ClientBundle\DependencyInjection;
 
 use Innmind\Rest\ClientBundle\DependencyInjection\InnmindRestClientExtension;
 use Innmind\Rest\Client\{
-    Definition\TypeInterface,
-    ClientInterface
+    Definition\Type,
+    Client
 };
 use Symfony\Component\{
     HttpKernel\DependencyInjection\Extension,
@@ -29,7 +29,7 @@ class InnmindRestClientExtensionTest extends TestCase
 
     public function testLoad()
     {
-        $type = get_class($this->createMock(TypeInterface::class));
+        $type = get_class($this->createMock(Type::class));
         $container = new ContainerBuilder;
         (new InnmindRestClientExtension)->load(
             [[
@@ -157,7 +157,7 @@ class InnmindRestClientExtensionTest extends TestCase
         $container->compile();
 
         $this->assertInstanceOf(
-            ClientInterface::class,
+            Client::class,
             $container->get('innmind_rest_client')
         );
     }

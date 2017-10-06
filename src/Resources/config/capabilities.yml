@@ -2,7 +2,7 @@ services:
     innmind_rest_client.capability: '@innmind_rest_client.capability.refresh_limited'
 
     innmind_rest_client.capability.default:
-        class: Innmind\Rest\Client\Server\Capabilities\Factory
+        class: Innmind\Rest\Client\Server\Capabilities\Factory\Factory
         public: false
         arguments:
             - '@innmind_rest_client.transport'
